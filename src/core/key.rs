@@ -1,9 +1,9 @@
-use k256::ecdsa::{SigningKey, VerifyingKey}; // ใช้ VerifyingKey ให้ตรงกับประเภท
+use k256::ecdsa::{SigningKey, VerifyingKey};
 
 pub fn generate_keys() -> (SigningKey, VerifyingKey) {
-    let private_key = SigningKey::random(&mut rand::rngs::OsRng);  // สร้าง SigningKey
-    let public_key = private_key.verifying_key().clone();  // สร้าง VerifyingKey จาก SigningKey และ clone เพื่อให้เป็น owned value
-    (private_key, public_key)  // คืนค่าทั้งสอง
+    let private_key = SigningKey::random(&mut rand::rngs::OsRng);
+    let public_key = private_key.verifying_key().clone();
+    (private_key, public_key)
 }
 
 

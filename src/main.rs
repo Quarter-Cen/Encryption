@@ -1,4 +1,3 @@
-extern crate encryption;  // นำเข้าโปรเจกต์หลัก
 use encryption::core::hashing::compute_file_hash;
 use encryption::core::key::{generate_keys, public_key_to_hex};
 use encryption::core::signature::{sign_hash, verify_signature};
@@ -22,7 +21,6 @@ fn main() {
     // แปลง Public Key เป็น Hex
     let public_key_hex = public_key_to_hex(&public_key);
 
-    // แสดงผลลัพธ์
     println!("Signature: {:?}", signature);
     println!("Public Key of Sender: {}", public_key_hex);
 
