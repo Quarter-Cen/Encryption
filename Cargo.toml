@@ -1,0 +1,11 @@
+[package]
+name = "Encryption"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+ecdsa = "0.16.9"
+k256 = "0.13.4"  # หรือเวอร์ชันที่ตรงกับการใช้งานของคุณ
+sha2 = "0.10"
+rand = "0.8.5"
+hex = "0.4"  # เพิ่มเข้าไป
