@@ -3,17 +3,6 @@
 version = 4
 
 [[package]]
-name = "Encryption"
-version = "0.1.0"
-dependencies = [
- "ecdsa",
- "hex",
- "k256",
- "rand",
- "sha2",
-]
-
-[[package]]
 name = "base16ct"
 version = "0.2.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -136,6 +125,17 @@ dependencies = [
  "sec1",
  "subtle",
  "zeroize",
+]
+
+[[package]]
+name = "encryption"
+version = "0.1.0"
+dependencies = [
+ "ecdsa",
+ "hex",
+ "k256",
+ "rand",
+ "sha2",
 ]
 
 [[package]]
