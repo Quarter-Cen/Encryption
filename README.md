@@ -26,7 +26,10 @@ This project is a system for managing and issuing **Digital Licenses**. It helps
 - **Version Control**: Git
 - **Testing**: Rust
 
-## ฟีเจอร์หลัก (Features)
+## ฟีเจอร์หลัก
 - ระบบออกใบอนุญาตดิจิทัล (Digital License)
 - การเข้ารหัสและถอดรหัสข้อมูลใบอนุญาต (Encryption)
 - การตรวจสอบความถูกต้องของใบอนุญาต
+
+## Output
+![image](https://github.com/user-attachments/assets/01da701d-5007-439f-8a6b-7a29463e8de0)
