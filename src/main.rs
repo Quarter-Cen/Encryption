@@ -1,4 +1,3 @@
-
 use encryption::core::hashing::compute_file_hash;
 use encryption::core::key::{generate_keys, public_key_to_hex};
 use encryption::core::signature::{sign_hash, verify_signature};
