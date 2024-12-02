@@ -28,7 +28,7 @@ This project is a system for managing and issuing **Digital Licenses**. It helps
 
 ## ฟีเจอร์หลัก
 - ระบบออกใบอนุญาตดิจิทัล (Digital License)
-- การเข้ารหัสและถอดรหัสข้อมูลใบอนุญาต (Encryption)
+- การเข้ารหัสข้อมูลใบอนุญาต (Encryption)
 - การตรวจสอบความถูกต้องของใบอนุญาต
 
 ## Output
