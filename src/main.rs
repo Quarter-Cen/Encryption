@@ -15,14 +15,18 @@ fn main() {
     let file_hash = compute_file_hash(file_path).expect("Failed to compute file hash");
     let elapsed_time = start_time.elapsed();
 
+    let start_sign_time = Instant::now();
     // เซ็นแฮชด้วยคีย์ส่วนตัว
     let signature = sign_hash(&private_key, &file_hash);
 
     // แปลง Public Key เป็น Hex
     let public_key_hex = public_key_to_hex(&public_key);
+    let elapsed_sign_time = start_sign_time.elapsed();
 
     println!("Signature: {:?}", signature);
     println!("Public Key of Sender: {}", public_key_hex);
+
+    let start_verify_time = Instant::now();
 
     // ตรวจสอบลายเซ็น
     if verify_signature(&public_key, &file_hash, &signature) {
@@ -30,6 +34,9 @@ fn main() {
     } else {
         println!("Receiver: The signature is invalid, the file is not authentic.");
     }
+    let elapsed_verify_time = start_verify_time.elapsed();
 
-    println!("Time taken for file processing and signing: {:?}", elapsed_time);
+    println!("Time taken for file hashing: {:?}", elapsed_time);
+    println!("Time taken for file signing: {:?}", elapsed_sign_time);
+    println!("Time taken for file verifying: {:?}", elapsed_verify_time);
 }
