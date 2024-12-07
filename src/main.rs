@@ -1,7 +1,8 @@
 use encryption::core::hashing::{compute_file_hash, compute_data_hash};
 use encryption::core::key::{generate_keys, public_key_to_hex};
 use encryption::core::signature::{sign_hash, verify_signature};
-use std::time::{Instant, SystemTime, UNIX_EPOCH};
+use encryption::core::utils::{create_nonce, get_current_timestamp};
+
 
 fn main() {
     let file_path = "Portfolio.pdf";
@@ -13,13 +14,11 @@ fn main() {
     let public_key_hex = public_key_to_hex(&public_key);
 
     // คำนวณแฮชของไฟล์
-    let start_time = Instant::now();
     let file_hash = compute_file_hash(file_path).expect("Failed to compute file hash");
-    let elapsed_time = start_time.elapsed();
 
     // สร้าง Nonce และ Timestamp
-    let nonce = "random_nonce";
-    let timestamp = SystemTime::now().duration_since(UNIX_EPOCH).expect("Time went backwards").as_secs();
+    let nonce = create_nonce();
+    let timestamp = get_current_timestamp();
 
     // คำนวณแฮชของ Nonce และ Timestamp
     let nonce_hash = compute_data_hash(nonce.as_bytes()).expect("Failed to hash nonce");
@@ -40,18 +39,14 @@ fn main() {
     ].concat();
     let combined_hash = compute_data_hash(&combined_metadata).expect("Failed to combine hash");
 
-    let start_sign_time = Instant::now();
     // เซ็นแฮชด้วยคีย์ส่วนตัว
     let signature = sign_hash(&private_key, &combined_hash);
-    let elapsed_sign_time = start_sign_time.elapsed();
-
 
     println!("Signature: {:?}", signature);
     println!("Public Key of Sender: {}", public_key_hex);
     println!("Nonce Hash: {:?}", nonce_hash);
     println!("Timestamp Hash: {:?}", timestamp_hash);
 
-    let start_verify_time = Instant::now();
 
     // ตรวจสอบลายเซ็นการส่ง
     if verify_signature(&public_key, &combined_hash, &signature) {
@@ -66,11 +61,4 @@ fn main() {
     } else {
         println!("Receiver: The nonce is invalid, the file is not authentic.");
     }
-
-    let elapsed_verify_time = start_verify_time.elapsed();
-
-    println!("Time taken for file hashing: {:?}", elapsed_time);
-    println!("Time taken for file signing: {:?}", elapsed_sign_time);
-    println!("Time taken for file verifying: {:?}", elapsed_verify_time);
-    
 }
