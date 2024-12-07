@@ -3,4 +3,5 @@ pub mod core {
     pub mod key;
     pub mod signature;
     pub mod utils;
+    pub mod metadata;
 }

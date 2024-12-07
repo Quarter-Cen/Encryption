@@ -2,19 +2,22 @@ use encryption::core::hashing::{compute_file_hash, compute_data_hash};
 use encryption::core::key::{generate_keys, public_key_to_hex};
 use encryption::core::signature::{sign_hash, verify_signature};
 use encryption::core::utils::{create_nonce, get_current_timestamp};
-
+use encryption::core::metadata::{check_secret, add_secret, create_doc, save_doc};
 
 fn main() {
     let file_path = "Portfolio.pdf";
+
+    let mut doc = create_doc(file_path);
+
+
+    // บันทึกไฟล์ที่แก้ไข
+    save_doc(&mut doc, file_path);
 
     // สร้างคีย์ส่วนตัวและคีย์สาธารณะ
     let (private_key, public_key) = generate_keys();
 
     // แปลง Public Key เป็น Hex
     let public_key_hex = public_key_to_hex(&public_key);
-
-    // คำนวณแฮชของไฟล์
-    let file_hash = compute_file_hash(file_path).expect("Failed to compute file hash");
 
     // สร้าง Nonce และ Timestamp
     let nonce = create_nonce();
@@ -29,6 +32,14 @@ fn main() {
     // เซ็นแฮชของ Nonce ด้วยคีย์ส่วนตัว
     let nonce_signature = sign_hash(&private_key, &nonce_hash);
     let nonce_signature_hash = compute_data_hash(&nonce_signature.to_bytes()).expect("Failed to hash nonce");
+
+    // เรียกฟังก์ชันเพิ่ม Info dictionary
+    if let Err(e) = add_secret(&mut doc,&nonce_signature_hash,&timestamp_hash,&public_key) {
+        println!("Error adding Info: {:?}", e);
+    }
+
+    // คำนวณแฮชของไฟล์
+    let file_hash = compute_file_hash(file_path).expect("Failed to compute file hash");
 
     // รวมข้อมูลทั้งหมดเพื่อคำนวณ hash
     let combined_metadata = [
@@ -60,5 +71,10 @@ fn main() {
         println!("Receiver: The nonce is valid, the file is authentic.");
     } else {
         println!("Receiver: The nonce is invalid, the file is not authentic.");
+    }
+
+    // เรียกฟังก์ชันตรวจสอบ Info dictionary
+    if let Err(e) = check_secret(&doc) {
+            println!("Error checking Info: {:?}", e);
     }
 }
