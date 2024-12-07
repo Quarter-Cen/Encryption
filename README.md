@@ -2,7 +2,7 @@
 # Digital License Project
 
 ## Description
-This project is a system for managing and issuing **Digital Licenses**. It helps in creating digital licenses for sending files and allows validation of licenses through encryption technologies to prevent fraud.
+This project is a system for managing and issuing **Digital Licenses**. It helps in creating digital licenses for sending files, Embed data on files and allows validation of licenses through encryption technologies to prevent fraud.
 
 ## Tech Stack
 - **Proof of Concept**: Rust
@@ -18,7 +18,7 @@ This project is a system for managing and issuing **Digital Licenses**. It helps
 # Digital License Project
 
 ## คำอธิบาย
-โปรเจกต์นี้เป็นระบบจัดการและออก **Digital License** โดยระบบจะช่วยในการออกใบอนุญาตดิจิทัลสำหรับการส่งไฟล์ และสามารถตรวจสอบความถูกต้องของใบอนุญาตได้ผ่านเทคโนโลยีการเข้ารหัส (Encryption) เพื่อป้องกันการปลอมแปลง
+โปรเจกต์นี้เป็นระบบจัดการและออก **Digital License** โดยระบบจะช่วยในการออกใบอนุญาตดิจิทัลสำหรับการส่งไฟล์ ฝังข้อมูลลงในไฟล์ และสามารถตรวจสอบความถูกต้องของใบอนุญาตได้ผ่านเทคโนโลยีการเข้ารหัส (Encryption) เพื่อป้องกันการปลอมแปลง
 
 ## เทคโนโลยีที่ใช้
 - **Proof of Concept**: Rust
