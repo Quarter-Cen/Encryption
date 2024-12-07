@@ -47,3 +47,10 @@ pub fn compute_file_hash(file_path: &str) -> Result<Vec<u8>, Box<dyn std::error:
 
     Ok(final_hash.to_vec())
 }
+
+pub fn compute_data_hash(data: &[u8]) -> Result<Vec<u8>, Box<dyn std::error::Error>> {
+    let mut hasher = Sha256::new();
+    hasher.update(data);
+    let result = hasher.finalize();
+    Ok(result.to_vec())
+}
